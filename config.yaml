@@ -1,0 +1,90 @@
+project_name: "IOL_selection_analysis"
+seed: 42
+n_bootstrap: 1000
+
+train_path: ""
+val_path: ""
+test_path: ""
+output_path: ""
+
+features_forIOL_pre_op: []
+
+features_forIOL_post_1m: []
+
+features_forIOL_post_3m: []
+
+features_forIOL_post_6m: []
+
+features_forMtf_pre_op: []
+
+features_forMtf_post_1m: []
+
+features_forMtf_post_3m: []
+
+features_forMtf_post_6m: []
+
+features_forRetinal_pre_op: []
+
+features_forRetinal_post_1m: []
+
+features_forRetinal_post_3m: []
+
+features_forRetinal_post_6m: []
+
+tasks:
+  tasks_stage1_iol:
+    Lens_Type: 3
+
+  tasks_stage2_3month:
+    Post3m_Label_MTF: 2
+    mferg3m_Label_Q1: 2
+    mferg3m_Label_Q2: 2
+    mferg3m_Label_Q3: 2
+    mferg3m_Label_Q4: 2
+
+  tasks_stage3_6month:
+    Post6m_Label_MTF: 2
+    mferg6m_Label_Q1: 2
+    mferg6m_Label_Q2: 2
+    mferg6m_Label_Q3: 2
+    mferg6m_Label_Q4: 2
+
+model_params:
+  xgb:
+    n_estimators: 300
+    learning_rate: 0.05
+    max_depth: 4
+    subsample: 0.8
+    colsample_bytree: 0.8
+    min_child_weight: 2
+    early_stopping_rounds: 20
+    n_jobs: -1
+
+  dummy:
+    strategy: "most_frequent"
+
+  lr:
+    C: 1.0
+    solver: "lbfgs"
+    max_iter: 2000
+    tol: 0.0001
+    class_weight: null
+
+  rf:
+    n_estimators: 300
+    max_depth: 4
+    min_samples_split: 4
+    min_samples_leaf: 2
+    max_features: "sqrt"
+    bootstrap: true
+    class_weight: null
+    n_jobs: -1
+
+  svm:
+    C: 1.0
+    kernel: "rbf"
+    gamma: "scale"
+    probability: true
+    class_weight: null
+    tol: 0.001
+    cache_size: 200
